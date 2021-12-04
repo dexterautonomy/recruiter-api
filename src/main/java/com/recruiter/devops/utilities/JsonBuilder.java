@@ -33,7 +33,7 @@ public class JsonBuilder {
         try {
             target = objectMapper.readValue(json, type);
         } catch (IOException e) {
-        	log.info("---->>>> Error: JSON parsing failure");
+        	log.info("---->>>> Error: JSON parsing failure {}", e);
         }
         return target;
     }

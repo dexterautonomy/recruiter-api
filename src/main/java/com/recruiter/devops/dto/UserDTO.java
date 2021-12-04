@@ -1,7 +1,5 @@
 package com.recruiter.devops.dto;
 
-import java.util.UUID;
-
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -17,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDTO {
-	private UUID id;
+	private String id;
 	@NotBlank
 	private String name;
 	@NotBlank

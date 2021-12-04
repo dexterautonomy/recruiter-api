@@ -1,7 +1,5 @@
 package com.recruiter.devops.dto;
 
-import java.util.UUID;
-
 import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -13,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AddressDTO {
-	private UUID id;
+	private String id;
 	@NotBlank
 	private String city;
 	@NotBlank
