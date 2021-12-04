@@ -17,7 +17,7 @@ import com.mongodb.client.MongoClients;
 public class MongoDBConfig extends AbstractMongoClientConfiguration
 {
 	private static final String DATABASENAME = "Demo";
-	private static final String DATABASECONNECTION = "mongodb://cluster0.vciap.mongodb.net/";
+	private static final String DATABASECONNECTION = "mongodb://demouser:demo@123@cluster0.vciap.mongodb.net/";
 	
 	@Override
     protected String getDatabaseName()
