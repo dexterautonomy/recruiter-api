@@ -8,8 +8,6 @@ import javax.validation.UnexpectedTypeException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
-import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -83,18 +81,6 @@ public class AppControllerAdvice {
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(UnexpectedTypeException.class)
 	public ResponseDTO<String> handleUnexpectedTypeException(UnexpectedTypeException ex) {
-		return new ResponseDTO<>(FAILURE.getCode(), FAILURE.getMessage(), ex.getMessage());
-	}
-
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	@ExceptionHandler(JpaObjectRetrievalFailureException.class)
-	public ResponseDTO<String> handleJpaObjectRetrievalFailureException(JpaObjectRetrievalFailureException ex) {
-		return new ResponseDTO<>(FAILURE.getCode(), FAILURE.getMessage(), ex.getMessage());
-	}
-
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	@ExceptionHandler(JpaSystemException.class)
-	public ResponseDTO<String> handleJpaSystemException(JpaSystemException ex) {
 		return new ResponseDTO<>(FAILURE.getCode(), FAILURE.getMessage(), ex.getMessage());
 	}
 	
