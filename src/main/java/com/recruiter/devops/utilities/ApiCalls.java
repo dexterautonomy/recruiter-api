@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.recruiter.devops.config.AppProperties;
-import com.recruiter.devops.model.User;
+import com.recruiter.devops.dto.UserDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,19 +21,19 @@ public class ApiCalls {
 	@Autowired
 	private RestTemplate restTemplate;
 	
-	public List<User> fetchExternalUsers() {
+	public List<UserDTO> fetchExternalUsers() {
 		try {
 			String response = restTemplate.getForObject(props.getExternal(), String.class);
 			log.info("---->>> {}", response);
 			
-			List<User> users = JsonBuilder.toClassTypeReference(response, new TypeReference<List<User>>() {});
+			List<UserDTO> userDTOs = JsonBuilder.toClassTypeReference(response, new TypeReference<List<UserDTO>>() {});
 			
-			return users;
+			return userDTOs;
 		}
 		catch (RestClientException e) {
 			log.error("---->>> Error: " + e);
+			
+			return null;
 		}
-		
-		return null;
 	}
 }

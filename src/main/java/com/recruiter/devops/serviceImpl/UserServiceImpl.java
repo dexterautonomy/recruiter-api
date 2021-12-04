@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.stereotype.Service;
 
 import com.recruiter.devops.dto.UserDTO;
@@ -25,14 +26,21 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Optional<List<UserDTO>> fetUsers() {
 		List<UserDTO> userDTOs = null;
-		List<User> users = userRepo.findAll();
 		
-		if(users.isEmpty()) {
-			users = apiCalls.fetchExternalUsers();
+		try {
+			List<User> users = userRepo.findAll();
+			
+			if(users.isEmpty()) {
+				userDTOs = apiCalls.fetchExternalUsers();
+			}
+			else {
+				userDTOs = userConverter.fetUserDTO(users);
+			}
 		}
-		
-		userDTOs = userConverter.fetUserDTO(users);
-		
+		catch(DataAccessResourceFailureException e) {
+			userDTOs = apiCalls.fetchExternalUsers();
+		}
+
 		return Optional.of(userDTOs);
 	}
 }
