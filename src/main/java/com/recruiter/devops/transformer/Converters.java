@@ -23,7 +23,7 @@ public class Converters {
 		user.setName(userDTO.getName());
 		user.setPhonenumber(userDTO.getPhonenumber());
 		user.setUsername(userDTO.getUsername());
-		user.setAddress(convertAddressDTO_Address(userDTO.getAddressDTO()));
+		user.setAddress(convertAddressDTO_Address(userDTO.getAddress()));
 		
 		return user;
 	}
@@ -44,7 +44,7 @@ public class Converters {
 		userDTO.setName(user.getName());
 		userDTO.setPhonenumber(user.getPhonenumber());
 		userDTO.setUsername(user.getUsername());
-		userDTO.setAddressDTO(convertAddress_AddressDTO(user.getAddress()));
+		userDTO.setAddress(convertAddress_AddressDTO(user.getAddress()));
 		
 		return userDTO;
 	}

@@ -29,5 +29,5 @@ public class UserDTO {
 	private String email;
 	@Valid
 	@NotNull
-	private AddressDTO addressDTO;
+	private AddressDTO address;
 }

@@ -22,18 +22,18 @@ public class ApiCalls {
 	private RestTemplate restTemplate;
 	
 	public List<UserDTO> fetchExternalUsers() {
+		List<UserDTO> userDTOs = null;
+		
 		try {
 			String response = restTemplate.getForObject(props.getExternal(), String.class);
 			log.info("---->>> {}", response);
 			
-			List<UserDTO> userDTOs = JsonBuilder.toClassTypeReference(response, new TypeReference<List<UserDTO>>() {});
-			
-			return userDTOs;
+			userDTOs = JsonBuilder.toClassTypeReference(response, new TypeReference<List<UserDTO>>() {});
 		}
 		catch (RestClientException e) {
 			log.error("---->>> Error: " + e);
-			
-			return null;
 		}
+		
+		return userDTOs;
 	}
 }
