@@ -39,7 +39,7 @@ public class Converters {
 
 	public UserDTO convertUser_UserDTO(User user) {
 		UserDTO userDTO = new UserDTO();
-		userDTO.setId(user.getId());
+		userDTO.setId(user.getId().toString());
 		userDTO.setEmail(user.getEmail());
 		userDTO.setName(user.getName());
 		userDTO.setPhonenumber(user.getPhonenumber());
