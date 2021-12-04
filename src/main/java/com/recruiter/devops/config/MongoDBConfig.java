@@ -1,5 +1,8 @@
 package com.recruiter.devops.config;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -16,8 +19,8 @@ import com.mongodb.client.MongoClients;
 @EnableMongoRepositories(basePackages = "com.recruiter.devops")
 public class MongoDBConfig extends AbstractMongoClientConfiguration
 {
+
 	private static final String DATABASENAME = "Demo";
-	private static final String DATABASECONNECTION = "mongodb://demouser:demo@123@cluster0.vciap.mongodb.net/";
 	
 	@Override
     protected String getDatabaseName()
@@ -28,12 +31,21 @@ public class MongoDBConfig extends AbstractMongoClientConfiguration
     @Override
     public MongoClient mongoClient()
     {
-        ConnectionString connectionString = new ConnectionString(DATABASECONNECTION + DATABASENAME);
-        MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
-            .applyConnectionString(connectionString)
-            .build();
-        
-        return MongoClients.create(mongoClientSettings);
+    	String DATABASECONNECTION;
+		try {
+			DATABASECONNECTION = "mongodb://demouser:" + 
+			URLEncoder.encode("demo@123", StandardCharsets.UTF_8.toString()) + "@cluster0.vciap.mongodb.net/";
+			ConnectionString connectionString = new ConnectionString(DATABASECONNECTION + DATABASENAME);
+	        MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
+	            .applyConnectionString(connectionString)
+	            .build();
+	        
+	        return MongoClients.create(mongoClientSettings);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+    	
+        return null;
     }
  
 	@Override
