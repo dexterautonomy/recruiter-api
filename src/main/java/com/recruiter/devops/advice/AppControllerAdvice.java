@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.validation.UnexpectedTypeException;
 
+import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -87,6 +88,12 @@ public class AppControllerAdvice {
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ExceptionHandler(ResourceAccessException.class)
 	public ResponseDTO<String> handleResourceAccessException(ResourceAccessException ex) {
+		return new ResponseDTO<>(EXTERNAL_SERVER_UNAVAILABLE.getCode(), EXTERNAL_SERVER_UNAVAILABLE.getMessage(), ex.getMessage());
+	}
+	
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ExceptionHandler(DataAccessResourceFailureException.class)
+	public ResponseDTO<String> handleDataAccessResourceFailureException(DataAccessResourceFailureException ex) {
 		return new ResponseDTO<>(EXTERNAL_SERVER_UNAVAILABLE.getCode(), EXTERNAL_SERVER_UNAVAILABLE.getMessage(), ex.getMessage());
 	}
 }
