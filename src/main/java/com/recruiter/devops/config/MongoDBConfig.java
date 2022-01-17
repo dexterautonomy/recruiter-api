@@ -33,6 +33,9 @@ public class MongoDBConfig extends AbstractMongoClientConfiguration
     {
     	String DATABASECONNECTION;
 		try {
+//			username = demouser
+//			password = demo@123
+			
 			DATABASECONNECTION = "mongodb://demouser:" + 
 			URLEncoder.encode("demo@123", StandardCharsets.UTF_8.toString()) + "@cluster0.vciap.mongodb.net/";
 			ConnectionString connectionString = new ConnectionString(DATABASECONNECTION + DATABASENAME);
